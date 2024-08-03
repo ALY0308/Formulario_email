@@ -30,3 +30,22 @@ document.getElementById('contactForm').addEventListener('submit', function(event
 
     // Aquí puedes añadir lógica para enviar estos datos a un servidor
 });
+const frmEmail = document.getElementById('frm-email')
+frmEmail.addEventListener('submit', sendEmail)
+
+const serviceId = 'service_8qd16hl'
+const templateId = 'template_0rrema2'
+const apikey = 'Ggx-94IP8mRiLEnfj'
+
+function sendEmail(event) {
+    event.preventDefault()
+    emailjs.init(serviceId)
+
+    emailjs.sendForm(serviceId, templateId, frmEmail, apikey)
+    .then( result => Swal.fire("Su mensaje se ha enviado con exito") )
+    .catch( Swal.fire({
+        title: "Oops...",
+        text: "No ha sido posible enviar el mensaje!",
+        icon: "error"
+    }) )
+}
